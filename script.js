@@ -167,7 +167,7 @@ textureLoader.load('2.jpg', function(texture) {
     
 
     // Create a given number of SVG polygons
-    createSVGPolygons(5);
+    createSVGPolygons(2000);
 });
 
 // Handle window resize
