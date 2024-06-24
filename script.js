@@ -129,44 +129,45 @@ textureLoader.load('2.jpg', function(texture) {
         renderer.render(scene, camera);
     }
     animate();
-
     // Function to create SVG polygons
-    function createSVGPolygons(numPolygons) {
-        const svgNS = "http://www.w3.org/2000/svg";
-        const svg = document.createElementNS(svgNS, "svg");
-        svg.setAttribute("width", window.innerWidth);
-        svg.setAttribute("height", window.innerHeight);
-        svg.style.position = "absolute";
-        svg.style.top = "0";
-        svg.style.left = "0";
-        document.body.appendChild(svg);
+function createSVGPolygons(numPolygons) {
+    const svgNS = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(svgNS, "svg");
+    svg.setAttribute("width", window.innerWidth);
+    svg.setAttribute("height", window.innerHeight);
+    svg.style.position = "absolute";
+    svg.style.top = "0";
+    svg.style.left = "0";
+    document.body.appendChild(svg);
 
-        for (let i = 0; i < numPolygons; i++) {
-            let polygon = document.createElementNS(svgNS, "polygon");
-            let points = generateRandomPolygonPoints();
-            polygon.setAttribute("points", points);
-            polygon.setAttribute("stroke", "white");
-            polygon.setAttribute("stroke-width", "2");
-            polygon.setAttribute("fill", "red");
-            svg.appendChild(polygon);
-        }
+    for (let i = 0; i < numPolygons; i++) {
+        let polygon = document.createElementNS(svgNS, "polygon");
+        let points = generateRandomPolygonPoints();
+        polygon.setAttribute("points", points);
+        polygon.setAttribute("stroke", "white");
+        polygon.setAttribute("stroke-width", "2");
+        polygon.setAttribute("fill", "red");
+        svg.appendChild(polygon);
     }
+}
 
-    function generateRandomPolygonPoints() {
-        let points = [];
-        let numPoints = Math.floor(Math.random() * 5) + 3; // Randomly choose between 3 and 7 points
+function generateRandomPolygonPoints() {
+    let points = [];
+    let numPoints = Math.floor(Math.random() * 5) + 3; // Randomly choose between 3 and 7 points
 
-        for (let i = 0; i < numPoints; i++) {
-            let x = Math.random() * window.innerWidth;
-            let y = Math.random() * window.innerHeight;
-            points.push(`${x},${y}`);
-        }
-        return points.join(" ");
+    for (let i = 0; i < numPoints; i++) {
+        let x = Math.random() * window.innerWidth;
+        let y = Math.random() * window.innerHeight;
+        points.push(`${x},${y}`);
     }
+    return points.join(" ");
+}
 
-    // Create a given number of SVG polygons
-    createSVGPolygons(5);
+// Create a given number of SVG polygons
+createSVGPolygons(5);
+    
 });
+
 
 // Handle window resize
 window.addEventListener('resize', function() {
