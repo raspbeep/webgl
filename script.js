@@ -164,35 +164,7 @@ textureLoader.load('2.jpg', function(texture) {
         }
         return points.join(" ");
     }
-    function updateSVGElements(mesh) {
-        // For each SVG element related to the mesh
-        svgElements.forEach(svg => {
-            // Calculate new position based on mesh position and scale
-            // This is a simplified example; you may need to adjust calculations based on your specific setup
-            let newX = mesh.position.x * mesh.scale.x;
-            let newY = mesh.position.y * mesh.scale.y;
     
-            // Update SVG element position
-            svg.style.transform = `translate(${newX}px, ${newY}px) scale(${mesh.scale.x})`;
-    
-            // If you have rotation or other transformations, apply them similarly
-        });
-    }
-    
-    // Call updateSVGElements inside your event listeners after mesh transformations
-    renderer.domElement.addEventListener('touchmove', function(e) {
-        // Existing touchmove logic...
-    
-        // After mesh is transformed, update SVG elements
-        updateSVGElements(mesh);
-    });
-    
-    renderer.domElement.addEventListener('wheel', function(e) {
-        // Existing wheel event logic...
-    
-        // After mesh is transformed, update SVG elements
-        updateSVGElements(mesh);
-    });
 
     // Create a given number of SVG polygons
     createSVGPolygons(5);
