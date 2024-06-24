@@ -9,7 +9,7 @@ document.body.appendChild(renderer.domElement);
 
 // Load the texture and create the mesh
 let textureLoader = new THREE.TextureLoader();
-textureLoader.load('image.png', function(texture) {
+textureLoader.load('2.jpg', function(texture) {
     let geometry = new THREE.PlaneGeometry(texture.image.width, texture.image.height);
     let material = new THREE.MeshBasicMaterial({ map: texture });
     let mesh = new THREE.Mesh(geometry, material);
