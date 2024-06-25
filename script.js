@@ -134,18 +134,14 @@ textureLoader.load('2.jpg', function(texture) {
             // Create a shape from the points
             let polygonShape = new THREE.Shape(points);
             
-            // Create a geometry from the shape
             let polygonGeometry = new THREE.ShapeGeometry(polygonShape);
+
+            // Create a mesh material with wireframe
+            let meshMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true });
             
-            // Create an edges geometry from the polygon geometry
-            let edgesGeometry = new THREE.EdgesGeometry(polygonGeometry);
-            
-            // Create a line material
-            let lineMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
-            
-            // Create a line segments mesh with the edges geometry and line material
-            let edgeLines = new THREE.LineSegments(edgesGeometry, lineMaterial);
-            edgeLines.name = 'Polygon_' + i;
+            // Create a mesh with the polygon geometry and mesh material
+            let polygonMesh = new THREE.Mesh(polygonGeometry, meshMaterial);
+            polygonMesh.name = 'Polygon_' + i;
 
             // Add the line segments to the scene
             scene.add(edgeLines);
