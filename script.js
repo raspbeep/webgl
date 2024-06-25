@@ -108,20 +108,21 @@ textureLoader.load('2.jpg', function(texture) {
             lastDist = dist;
             lastCenter = newCenter;
         } else {
-            if (isDragging) {
-                let deltaMove = {
-                    x: e.clientX - previousMousePosition.x,
-                    y: e.clientY - previousMousePosition.y
-                };
+            // if (isDragging) {
+            //     let deltaMove = {
+            //         x: e.clientX - previousMousePosition.x,
+            //         y: e.clientY - previousMousePosition.y
+            //     };
     
-                scene.position.x += deltaMove.x;
-                scene.position.y -= deltaMove.y;
+            //     scene.position.x += deltaMove.x;
+            //     scene.position.y -= deltaMove.y;
     
-                previousMousePosition = {
-                    x: e.clientX,
-                    y: e.clientY
-                };
-            }
+            //     previousMousePosition = {
+            //         x: e.clientX,
+            //         y: e.clientY
+            //     };
+            // }
+            console.log('one finger: ', e.clientX, e.clientY)
         }
     });
 
