@@ -68,40 +68,38 @@ textureLoader.load('2.jpg', function(texture) {
         e.preventDefault();
         let touch1 = e.touches[0];
         let touch2 = e.touches[1];
-
+    
         if (touch1 && touch2) {
             let p1 = { x: touch1.clientX, y: touch1.clientY };
             let p2 = { x: touch2.clientX, y: touch2.clientY };
-
+    
             if (!lastCenter) {
                 lastCenter = getCenter(p1, p2);
+                lastDist = getDistance(p1, p2);
                 return;
             }
+            
             let newCenter = getCenter(p1, p2);
             let dist = getDistance(p1, p2);
-
-            if (!lastDist) {
-                lastDist = dist;
-            }
-
+    
             let pointTo = {
                 x: (newCenter.x - scene.position.x) / scene.scale.x,
                 y: (newCenter.y - scene.position.y) / scene.scale.y
             };
             let scale = scene.scale.x * (dist / lastDist);
-
+    
             scene.scale.set(scale, scale, 1);
-
-            let dx = newCenter.x + lastCenter.x;
-            let dy = newCenter.y + lastCenter.y;
-
+    
+            let dx = (newCenter.x - lastCenter.x) / scene.scale.x;
+            let dy = (newCenter.y - lastCenter.y) / scene.scale.y;
+    
             let newPos = {
-                x: newCenter.x - pointTo.x * scale + dx,
-                y: newCenter.y - pointTo.y * scale + dy
+                x: scene.position.x - dx,
+                y: scene.position.y - dy
             };
-
+    
             scene.position.set(newPos.x, newPos.y, mesh.position.z);
-
+    
             lastDist = dist;
             lastCenter = newCenter;
         }
