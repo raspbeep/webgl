@@ -108,6 +108,7 @@ textureLoader.load('2.jpg', function(texture) {
             lastDist = dist;
             lastCenter = newCenter;
         } else {
+            isDragging = true;
             if (isDragging) {
                 let deltaMove = {
                     x: e.touches[0].clientX - previousMousePosition.x,
