@@ -145,11 +145,39 @@ textureLoader.load('2.jpg', function(texture) {
             
             // Create a line segments mesh with the edges geometry and line material
             let edgeLines = new THREE.LineSegments(edgesGeometry, lineMaterial);
+            edgeLines.name = 'Polygon_' + i;
+
+            // Add the line segments to the scene
+            scene.add(edgeLines);
             
             // Add the line segments to the scene
             scene.add(edgeLines);
         }
     }
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+
+    renderer.domElement.addEventListener('click', (event) => {
+        // Calculate mouse position in normalized device coordinates (-1 to +1) for both components
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+        // Update the picking ray with the camera and mouse position
+        raycaster.setFromCamera(mouse, camera);
+
+        // Calculate objects intersecting the picking ray
+        const intersects = raycaster.intersectObjects(scene.children);
+
+        for (let i = 0; i < intersects.length; i++) {
+            // Step 3: Determine which polygon was clicked and perform an action
+            if (intersects[i].object.name.startsWith('Polygon_')) {
+                console.log('Polygon clicked:', intersects[i].object.name);
+                // Perform any action here, e.g., change color, display information, etc.
+                intersects[i].object.material.color.set(0x00ff00); // Example: Change color to green
+                break; // Assuming you want to select the first intersected object
+            }
+        }
+    });
     generatePolygons(100);
 
     // Render loop
