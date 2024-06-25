@@ -137,15 +137,42 @@ textureLoader.load('2.jpg', function(texture) {
         isDragging = false;
     });
 
+    // renderer.domElement.addEventListener('wheel', function(e) {
+    //     e.preventDefault();
+    //     if (e.deltaY < 0) {
+    //         scene.scale.x *= 1.1;
+    //         scene.scale.y *= 1.1;
+    //     } else {
+    //         scene.scale.x /= 1.1;
+    //         scene.scale.y /= 1.1;
+    //     }
+    // });
     renderer.domElement.addEventListener('wheel', function(e) {
         e.preventDefault();
-        if (e.deltaY < 0) {
-            scene.scale.x *= 1.1;
-            scene.scale.y *= 1.1;
-        } else {
-            scene.scale.x /= 1.1;
-            scene.scale.y /= 1.1;
-        }
+
+        const oldScale = scene.scale.x;
+        const pointer = {
+            x: (e.clientX / window.innerWidth) * 2 - 1,
+            y: -(e.clientY / window.innerHeight) * 2 + 1
+        };
+
+        const mousePointTo = {
+            x: (pointer.x - scene.position.x) / oldScale,
+            y: (pointer.y - scene.position.y) / oldScale
+        };
+
+        const direction = e.deltaY > 0 ? -1 : 1;
+        const zoomPercent = 0.05 * direction;
+        const newScale = oldScale + oldScale * zoomPercent;
+
+        scene.scale.set(newScale, newScale, 1);
+
+        const newPos = {
+            x: pointer.x - mousePointTo.x * newScale,
+            y: pointer.y - mousePointTo.y * newScale
+        };
+
+        scene.position.set(newPos.x, newPos.y, scene.position.z);
     });
 
     function generatePolygons(n) {
