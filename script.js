@@ -78,27 +78,32 @@ textureLoader.load('2.jpg', function(texture) {
                 lastDist = getDistance(p1, p2);
                 return;
             }
-    
+            
             let newCenter = getCenter(p1, p2);
             let dist = getDistance(p1, p2);
     
-            // Calculate the scale factor
-            let scale = dist / lastDist;
+            let pointTo = {
+                x: (newCenter.x - scene.position.x) / scene.scale.x,
+                y: (newCenter.y - scene.position.y) / scene.scale.y
+            };
+            let scale = scene.scale.x * (dist / lastDist);
+    
             scene.scale.set(scale, scale, 1);
     
-            // Calculate translation needed
-            let dx = (newCenter.x - lastCenter.x) / scale;
-            let dy = (newCenter.y - lastCenter.y) / scale;
+            let dx = (newCenter.x - lastCenter.x) / scene.scale.x;
+            let dy = (newCenter.y - lastCenter.y) / scene.scale.y;
     
-            scene.position.x -= dx;
-            scene.position.y += dy;
+            let newPos = {
+                x: scene.position.x - dx,
+                y: scene.position.y - dy
+            };
     
-            // Update lastCenter and lastDist for next movement
+            scene.position.set(newPos.x, newPos.y, mesh.position.z);
+    
             lastDist = dist;
             lastCenter = newCenter;
         }
     });
-    
 
     renderer.domElement.addEventListener('touchend', function() {
         lastDist = 0;
