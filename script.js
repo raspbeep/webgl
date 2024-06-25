@@ -151,7 +151,9 @@ textureLoader.load('2.jpg', function(texture) {
         e.preventDefault();
 
         const oldScale = scene.scale.x;
-        console.log('wheel event:', e.clientX, e.clientY)
+        console.log('wheel event client:', e.clientX, e.clientY)
+        console.log('wheel event scene:', scene.position.x, scene.position.y)
+
         const pointer = {
             x: (e.clientX / window.innerWidth) * 2 - 1,
             y: -(e.clientY / window.innerHeight) * 2 + 1
