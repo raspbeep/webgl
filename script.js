@@ -128,8 +128,8 @@ textureLoader.load('2.jpg', function(texture) {
             let numPoints = 6;
             let points = [];
             for (let i = 0; i < numPoints; i++) {
-                let x = Math.random() * texture.image.width;
-                let y = Math.random() * texture.image.height;
+                let x = Math.random() * 7000;
+                let y = Math.random() * 4000;
                 points.push(new THREE.Vector2(x, y));
             }
 
