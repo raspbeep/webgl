@@ -173,10 +173,25 @@ textureLoader.load('2.jpg', function(texture) {
     });
     generatePolygons(3000);
 
-    // Render loop
+    // // Render loop
+    // function animate() {
+    //     requestAnimationFrame(animate);
+    //     renderer.render(scene, camera);
+    // }
+    // animate();
+
+    const stats = new Stats();
+    stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
+    document.body.appendChild(stats.dom);
+
+    // Modify your animate function to update stats
     function animate() {
+        stats.begin(); // Start monitoring FPS
+
         requestAnimationFrame(animate);
         renderer.render(scene, camera);
+
+        stats.end(); // End monitoring FPS
     }
     animate();
 });
