@@ -142,12 +142,9 @@ textureLoader.load('2.jpg', function(texture) {
             // Create a mesh with the polygon geometry and mesh material
             let polygonMesh = new THREE.Mesh(polygonGeometry, meshMaterial);
             polygonMesh.name = 'Polygon_' + i;
-
-            // Add the line segments to the scene
-            scene.add(edgeLines);
             
             // Add the line segments to the scene
-            scene.add(edgeLines);
+            scene.add(polygonMesh);
         }
     }
     const raycaster = new THREE.Raycaster();
