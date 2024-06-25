@@ -122,7 +122,7 @@ textureLoader.load('2.jpg', function(texture) {
             //         y: e.clientY
             //     };
             // }
-            console.log('one finger: ', e.touches)
+            console.log('one finger: ', e.touches[0].clientX, e.touches[0].clientY)
         }
     });
 
