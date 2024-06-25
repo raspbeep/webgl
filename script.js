@@ -64,13 +64,17 @@ textureLoader.load('2.jpg', function(texture) {
         isDragging = false;
     });
 
-    renderer.domElement.addEventListener('touchmove', function(e) {
-        e.preventDefault();
+    renderer.domElement.addEventListener('touchstart', function(e) {
         isDragging = true;
         previousMousePosition = {
             x: e.touches[0].clientX,
             y: e.touches[0].clientY
         };
+    });
+
+    renderer.domElement.addEventListener('touchmove', function(e) {
+        e.preventDefault();
+        
         let touch1 = e.touches[0];
         let touch2 = e.touches[1];
     
@@ -108,7 +112,6 @@ textureLoader.load('2.jpg', function(texture) {
             lastDist = dist;
             lastCenter = newCenter;
         } else {
-            isDragging = true;
             if (isDragging) {
                 let deltaMove = {
                     x: e.touches[0].clientX - previousMousePosition.x,
