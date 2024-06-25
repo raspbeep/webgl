@@ -171,7 +171,7 @@ textureLoader.load('2.jpg', function(texture) {
             }
         }
     });
-    generatePolygons(100);
+    generatePolygons(3000);
 
     // Render loop
     function animate() {
