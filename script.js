@@ -123,29 +123,33 @@ textureLoader.load('2.jpg', function(texture) {
         }
     });
 
-    let points = [
-        new THREE.Vector2(50, 100),
-        new THREE.Vector2(150, 50),
-        new THREE.Vector2(250, 100),
-        new THREE.Vector2(250, 200),
-        new THREE.Vector2(150, 150),
-        new THREE.Vector2(50, 200)
-    ];
-    
-    // Create a shape from the points
-    let polygonShape = new THREE.Shape(points);
-    
-    // Create a geometry from the shape
-    let newGeometry = new THREE.ShapeGeometry(polygonShape);
-    
-    // Create a material for the mesh
-    let newMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, side: THREE.DoubleSide });
-    
-    // Create a mesh with the geometry and material
-    let polygonMesh = new THREE.Mesh(newGeometry, newMaterial);
-    
-    // Add the mesh to the scene
-    scene.add(polygonMesh);
+    function generatePolygons(n) {
+        for (let i = 0; i < n; i++) {
+            let numPoints = 6;
+            let points = [];
+            for (let i = 0; i < numPoints; i++) {
+                let x = Math.random() * texture.image.width;
+                let y = Math.random() * texture.image.height;
+                points.push(new THREE.Vector2(x, y));
+            }
+
+            // Create a shape from the points
+            let polygonShape = new THREE.Shape(points);
+            
+            // Create a geometry from the shape
+            let newGeometry = new THREE.ShapeGeometry(polygonShape);
+            
+            // Create a material for the mesh
+            let newMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, side: THREE.DoubleSide });
+            
+            // Create a mesh with the geometry and material
+            let polygonMesh = new THREE.Mesh(newGeometry, newMaterial);
+            
+            // Add the mesh to the scene
+            scene.add(polygonMesh);
+        }
+    }
+    generatePolygons(1000);
 
     // Render loop
     function animate() {
