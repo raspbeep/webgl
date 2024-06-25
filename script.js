@@ -63,7 +63,7 @@ textureLoader.load('2.jpg', function(texture) {
     renderer.domElement.addEventListener('mouseup', function() {
         isDragging = false;
     });
-    
+
     renderer.domElement.addEventListener('touchmove', function(e) {
         e.preventDefault();
         let touch1 = e.touches[0];
@@ -138,7 +138,7 @@ textureLoader.load('2.jpg', function(texture) {
             let newGeometry = new THREE.ShapeGeometry(polygonShape);
             
             // Create a material for the mesh
-            let newMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, side: THREE.DoubleSide });
+            let newMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
             
             // Create a mesh with the geometry and material
             let polygonMesh = new THREE.Mesh(newGeometry, newMaterial);
