@@ -66,6 +66,11 @@ textureLoader.load('2.jpg', function(texture) {
 
     renderer.domElement.addEventListener('touchmove', function(e) {
         e.preventDefault();
+        isDragging = true;
+        previousMousePosition = {
+            x: e.clientX,
+            y: e.clientY
+        };
         let touch1 = e.touches[0];
         let touch2 = e.touches[1];
     
@@ -102,12 +107,28 @@ textureLoader.load('2.jpg', function(texture) {
     
             lastDist = dist;
             lastCenter = newCenter;
+        } else {
+            if (isDragging) {
+                let deltaMove = {
+                    x: e.clientX - previousMousePosition.x,
+                    y: e.clientY - previousMousePosition.y
+                };
+    
+                scene.position.x += deltaMove.x;
+                scene.position.y -= deltaMove.y;
+    
+                previousMousePosition = {
+                    x: e.clientX,
+                    y: e.clientY
+                };
+            }
         }
     });
 
     renderer.domElement.addEventListener('touchend', function() {
         lastDist = 0;
         lastCenter = null;
+        isDragging = false;
     });
 
     renderer.domElement.addEventListener('wheel', function(e) {
