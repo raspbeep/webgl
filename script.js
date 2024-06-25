@@ -63,7 +63,6 @@ textureLoader.load('2.jpg', function(texture) {
     renderer.domElement.addEventListener('mouseup', function() {
         isDragging = false;
     });
-
     renderer.domElement.addEventListener('touchmove', function(e) {
         e.preventDefault();
         let touch1 = e.touches[0];
