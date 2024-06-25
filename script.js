@@ -52,6 +52,7 @@ textureLoader.load('2.jpg', function(texture) {
 
             scene.position.x += deltaMove.x;
             scene.position.y -= deltaMove.y;
+            logScenePositionRelativeToCanvas();
 
             previousMousePosition = {
                 x: e.clientX,
