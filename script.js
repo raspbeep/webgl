@@ -123,51 +123,36 @@ textureLoader.load('2.jpg', function(texture) {
         }
     });
 
+    let points = [
+        new THREE.Vector2(50, 100),
+        new THREE.Vector2(150, 50),
+        new THREE.Vector2(250, 100),
+        new THREE.Vector2(250, 200),
+        new THREE.Vector2(150, 150),
+        new THREE.Vector2(50, 200)
+    ];
+    
+    // Create a shape from the points
+    let polygonShape = new THREE.Shape(points);
+    
+    // Create a geometry from the shape
+    let newGeometry = new THREE.ShapeGeometry(polygonShape);
+    
+    // Create a material for the mesh
+    let newMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, side: THREE.DoubleSide });
+    
+    // Create a mesh with the geometry and material
+    let polygonMesh = new THREE.Mesh(newGeometry, newMaterial);
+    
+    // Add the mesh to the scene
+    scene.add(polygonMesh);
+
     // Render loop
     function animate() {
         requestAnimationFrame(animate);
         renderer.render(scene, camera);
     }
     animate();
-
-    // Function to create SVG polygons
-    function createSVGPolygons(numPolygons) {
-        const svgNS = "http://www.w3.org/2000/svg";
-        const svg = document.createElementNS(svgNS, "svg");
-        svg.setAttribute("width", window.innerWidth);
-        svg.setAttribute("height", window.innerHeight);
-        svg.style.position = "absolute";
-        svg.style.top = "0";
-        svg.style.left = "0";
-        svg.style.pointerEvents = "none";
-        document.body.appendChild(svg);
-
-        for (let i = 0; i < numPolygons; i++) {
-            let polygon = document.createElementNS(svgNS, "polygon");
-            let points = generateRandomPolygonPoints();
-            polygon.setAttribute("points", points);
-            polygon.setAttribute("stroke", "white");
-            polygon.setAttribute("stroke-width", "2");
-            polygon.setAttribute("fill", "red");
-            svg.appendChild(polygon);
-        }
-    }
-
-    function generateRandomPolygonPoints() {
-        let points = [];
-        let numPoints = Math.floor(Math.random() * 5) + 3; // Randomly choose between 3 and 7 points
-
-        for (let i = 0; i < numPoints; i++) {
-            let x = Math.random() * window.innerWidth;
-            let y = Math.random() * window.innerHeight;
-            points.push(`${x},${y}`);
-        }
-        return points.join(" ");
-    }
-    
-
-    // Create a given number of SVG polygons
-    createSVGPolygons(2000);
 });
 
 // Handle window resize
