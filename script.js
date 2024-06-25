@@ -186,6 +186,7 @@ textureLoader.load('2.jpg', function(texture) {
             x: pointer.x - mousePointTo.x * newScale,
             y: pointer.y - mousePointTo.y * newScale
         };
+        logScenePositionRelativeToCanvas()
 
         scene.position.set(newPos.x, newPos.y, scene.position.z);
     });
