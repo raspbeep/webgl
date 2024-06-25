@@ -125,29 +125,32 @@ textureLoader.load('2.jpg', function(texture) {
         for (let i = 0; i < n; i++) {
             let numPoints = 6;
             let points = [];
-            for (let i = 0; i < numPoints; i++) {
-                let x = (Math.random() * 7000)-3500;
-                let y = (Math.random() * 4000)-2000;
+            for (let j = 0; j < numPoints; j++) { // Fixed variable shadowing by replacing i with j
+                let x = (Math.random() * 7000) - 3500;
+                let y = (Math.random() * 4000) - 2000;
                 points.push(new THREE.Vector2(x, y));
             }
-
+    
             // Create a shape from the points
             let polygonShape = new THREE.Shape(points);
             
             // Create a geometry from the shape
-            let newGeometry = new THREE.ShapeGeometry(polygonShape);
+            let polygonGeometry = new THREE.ShapeGeometry(polygonShape);
             
-            // Create a material for the mesh
-            let newMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+            // Create an edges geometry from the polygon geometry
+            let edgesGeometry = new THREE.EdgesGeometry(polygonGeometry);
             
-            // Create a mesh with the geometry and material
-            let polygonMesh = new THREE.Mesh(newGeometry, newMaterial);
+            // Create a line material
+            let lineMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
             
-            // Add the mesh to the scene
-            scene.add(polygonMesh);
+            // Create a line segments mesh with the edges geometry and line material
+            let edgeLines = new THREE.LineSegments(edgesGeometry, lineMaterial);
+            
+            // Add the line segments to the scene
+            scene.add(edgeLines);
         }
     }
-    generatePolygons(1000);
+    generatePolygons(100);
 
     // Render loop
     function animate() {
