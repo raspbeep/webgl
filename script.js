@@ -115,11 +115,11 @@ textureLoader.load('2.jpg', function(texture) {
     renderer.domElement.addEventListener('wheel', function(e) {
         e.preventDefault();
         if (e.deltaY < 0) {
-            mesh.scale.x *= 1.1;
-            mesh.scale.y *= 1.1;
+            scene.scale.x *= 1.1;
+            scene.scale.y *= 1.1;
         } else {
-            mesh.scale.x /= 1.1;
-            mesh.scale.y /= 1.1;
+            scene.scale.x /= 1.1;
+            scene.scale.y /= 1.1;
         }
     });
 
