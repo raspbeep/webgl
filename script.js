@@ -92,8 +92,8 @@ textureLoader.load('2.jpg', function(texture) {
 
             scene.scale.set(scale, scale, 1);
 
-            let dx = newCenter.x - lastCenter.x;
-            let dy = newCenter.y - lastCenter.y;
+            let dx = newCenter.x + lastCenter.x;
+            let dy = newCenter.y + lastCenter.y;
 
             let newPos = {
                 x: newCenter.x - pointTo.x * scale + dx,
