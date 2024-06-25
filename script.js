@@ -85,12 +85,12 @@ textureLoader.load('2.jpg', function(texture) {
             }
 
             let pointTo = {
-                x: (newCenter.x - mesh.position.x) / mesh.scale.x,
-                y: (newCenter.y - mesh.position.y) / mesh.scale.y
+                x: (newCenter.x - scene.position.x) / scene.scale.x,
+                y: (newCenter.y - scene.position.y) / scene.scale.y
             };
-            let scale = mesh.scale.x * (dist / lastDist);
+            let scale = scene.scale.x * (dist / lastDist);
 
-            mesh.scale.set(scale, scale, 1);
+            scene.scale.set(scale, scale, 1);
 
             let dx = newCenter.x - lastCenter.x;
             let dy = newCenter.y - lastCenter.y;
@@ -100,7 +100,7 @@ textureLoader.load('2.jpg', function(texture) {
                 y: newCenter.y - pointTo.y * scale + dy
             };
 
-            mesh.position.set(newPos.x, newPos.y, mesh.position.z);
+            scene.position.set(newPos.x, newPos.y, mesh.position.z);
 
             lastDist = dist;
             lastCenter = newCenter;
