@@ -151,11 +151,12 @@ textureLoader.load('2.jpg', function(texture) {
         e.preventDefault();
 
         const oldScale = scene.scale.x;
+        console.log('wheel event:', e.clientX, e.clientY)
         const pointer = {
             x: (e.clientX / window.innerWidth) * 2 - 1,
             y: -(e.clientY / window.innerHeight) * 2 + 1
         };
-        console.log(pointer)
+       
 
         const mousePointTo = {
             x: (pointer.x - scene.position.x) / oldScale,
