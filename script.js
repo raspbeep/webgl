@@ -155,6 +155,7 @@ textureLoader.load('2.jpg', function(texture) {
             x: (e.clientX / window.innerWidth) * 2 - 1,
             y: -(e.clientY / window.innerHeight) * 2 + 1
         };
+        console.log(pointer)
 
         const mousePointTo = {
             x: (pointer.x - scene.position.x) / oldScale,
