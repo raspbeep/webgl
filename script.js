@@ -68,8 +68,8 @@ textureLoader.load('2.jpg', function(texture) {
         e.preventDefault();
         isDragging = true;
         previousMousePosition = {
-            x: e.clientX,
-            y: e.clientY
+            x: e.touches[0].clientX,
+            y: e.touches[0].clientY
         };
         let touch1 = e.touches[0];
         let touch2 = e.touches[1];
