@@ -137,22 +137,33 @@ textureLoader.load('2.jpg', function(texture) {
         isDragging = false;
     });
 
-    // renderer.domElement.addEventListener('wheel', function(e) {
-    //     e.preventDefault();
-    //     if (e.deltaY < 0) {
-    //         scene.scale.x *= 1.1;
-    //         scene.scale.y *= 1.1;
-    //     } else {
-    //         scene.scale.x /= 1.1;
-    //         scene.scale.y /= 1.1;
-    //     }
-    // });
+    function logScenePositionRelativeToCanvas() {
+        const canvasSize = new THREE.Vector2();
+        renderer.getSize(canvasSize); // Get the size of the canvas
+    
+        // Calculate the center of the canvas in WebGL coordinates (-1 to 1 for x and y)
+        const canvasCenter = {
+            x: (canvasSize.x / window.innerWidth) * 2 - 1,
+            y: -(canvasSize.y / window.innerHeight) * 2 + 1
+        };
+    
+        // Calculate the offset of the scene from the center of the canvas
+        // This assumes the scene's position is already in the same coordinate system
+        const sceneOffset = {
+            x: (scene.position.x - canvasCenter.x) / scene.scale.x,
+            y: (scene.position.y - canvasCenter.y) / scene.scale.y
+        };
+    
+        console.log('Scene position relative to canvas:', sceneOffset);
+    }
+
     renderer.domElement.addEventListener('wheel', function(e) {
         e.preventDefault();
 
         const oldScale = scene.scale.x;
         console.log('wheel event client:', e.clientX, e.clientY)
         console.log('wheel event scene:', scene.position.x, scene.position.y)
+        logScenePositionRelativeToCanvas()
 
         const pointer = {
             x: (e.clientX / window.innerWidth) * 2 - 1,
